@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+	<setting id="subsonic_url" type="text" label="URL" default="http://demo.subsonic.org"/>
+    <setting id="username" type="text" label="Username" default="guest3"/>
+    <setting id="password" type="text" option="hidden" label="Password" default="guest"/>
+</settings>
