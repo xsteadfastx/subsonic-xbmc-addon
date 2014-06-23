@@ -1,10 +1,11 @@
-import requests
 import sys
 import urllib
 import urlparse
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
+sys.path.append('./resources/lib')
+import requests
 
 
 def build_url(query):
@@ -92,9 +93,11 @@ def track_list():
     album_id = args.get('album_id', None)
     tracks = get_music_directory_list(album_id[0])
     for track in tracks:
-        url = subsonic_api('stream.view', parameters={'id': track[1], 'maxBitRate': bitrate})
+        url = subsonic_api('stream.view', parameters={'id': track[1], 'maxBitRate': bitrate, 'format': trans_format, 'estimateContentLength': 'true'})
         li = xbmcgui.ListItem(track[0], iconImage=get_cover_art(track[1]))
         li.setProperty('fanart_image', get_cover_art(track[1]))
+        li.setProperty('IsPlayable', 'true')
+        li.setInfo(type='Music', infoLabels={'Title': track[0]})
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
@@ -108,6 +111,7 @@ if __name__ == '__main__':
     subsonic_url = my_addon.getSetting('subsonic_url')
     username = my_addon.getSetting('username')
     password = my_addon.getSetting('password')
+    trans_format = my_addon.getSetting('format')
     bitrate = my_addon.getSetting('bitrate')
 
     base_url = sys.argv[0]

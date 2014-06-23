@@ -1,0 +1,5 @@
+<playercorefactory>
+    <rules action="prepend">
+        <rule name="subsonic" filename=".*/rest/(stream|download).view.*" player="dvdplayer"/>
+    </rules>
+</playercorefactory>
