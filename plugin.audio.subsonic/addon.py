@@ -17,12 +17,17 @@ def subsonic_api(method, parameters={'none': 'none'}):
 
 
 def get_artist_list():
-    api_url = subsonic_api('getIndexes.view', parameters={'musicFolderId': '0'})
+    api_url = subsonic_api(
+        'getIndexes.view',
+        parameters={'musicFolderId': '0'})
     r = requests.get(api_url)
     artists = []
     for index in r.json()['subsonic-response']['indexes']['index']:
         for artist in index['artist']:
-            artists.append([artist['name'].encode('utf-8'), artist['id'].encode('utf-8')])
+            item = {}
+            item['name'] = artist['name'].encode('utf-8')
+            item['id'] = artist['id'].encode('utf-8')
+            artists.append(item)
 
     return artists
 
@@ -32,7 +37,11 @@ def get_music_directory_list(id):
     r = requests.get(api_url)
     albums = []
     for album in r.json()['subsonic-response']['directory']['child']:
-        albums.append([album['title'].encode('utf-8'), album['id'].encode('utf-8')])
+        item = {}
+        item['artist'] = album['artist'].encode('utf-8')
+        item['title'] = album['title'].encode('utf-8')
+        item['id'] = album['id'].encode('utf-8')
+        albums.append(item)
 
     return albums
 
@@ -57,11 +66,11 @@ def artist_list():
     artists = get_artist_list()
     for artist in artists:
         url = build_url({'mode': 'album_list',
-                         'foldername': artist[0],
-                         'artist_id': artist[1]})
-        li = xbmcgui.ListItem(artist[0],
-                              iconImage=get_cover_art(artist[1]))
-        li.setProperty('fanart_image', get_cover_art(artist[1]))
+                         'foldername': artist['name'],
+                         'artist_id': artist['id']})
+        li = xbmcgui.ListItem(artist['name'],
+                              iconImage=get_cover_art(artist['id']))
+        li.setProperty('fanart_image', get_cover_art(artist['id']))
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
@@ -76,10 +85,10 @@ def album_list():
     albums = get_music_directory_list(artist_id[0])
     for album in albums:
         url = build_url({'mode': 'track_list',
-                         'foldername': album[0],
-                         'album_id': album[1]})
-        li = xbmcgui.ListItem(album[0], iconImage=get_cover_art(album[1]))
-        li.setProperty('fanart_image', get_cover_art(album[1]))
+                         'foldername': album['title'],
+                         'album_id': album['id']})
+        li = xbmcgui.ListItem(album['title'], iconImage=get_cover_art(album['id']))
+        li.setProperty('fanart_image', get_cover_art(album['id']))
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
@@ -93,11 +102,16 @@ def track_list():
     album_id = args.get('album_id', None)
     tracks = get_music_directory_list(album_id[0])
     for track in tracks:
-        url = subsonic_api('stream.view', parameters={'id': track[1], 'maxBitRate': bitrate, 'format': trans_format, 'estimateContentLength': 'true'})
-        li = xbmcgui.ListItem(track[0], iconImage=get_cover_art(track[1]))
-        li.setProperty('fanart_image', get_cover_art(track[1]))
+        url = subsonic_api(
+            'stream.view',
+            parameters={'id': track['id'],
+                        'maxBitRate': bitrate,
+                        'format': trans_format,
+                        'estimateContentLength': 'true'})
+        li = xbmcgui.ListItem(track['title'], iconImage=get_cover_art(track['id']))
+        li.setProperty('fanart_image', get_cover_art(track['id']))
         li.setProperty('IsPlayable', 'true')
-        li.setInfo(type='Music', infoLabels={'Title': track[0]})
+        li.setInfo(type='Music', infoLabels={'Title': track['title']})
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
