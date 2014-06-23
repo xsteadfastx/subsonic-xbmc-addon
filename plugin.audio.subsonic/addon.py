@@ -68,8 +68,9 @@ def artist_list():
         url = build_url({'mode': 'album_list',
                          'foldername': artist['name'],
                          'artist_id': artist['id']})
-        li = xbmcgui.ListItem(artist['name'],
-                              iconImage=get_cover_art(artist['id']))
+        li = xbmcgui.ListItem(artist['name'])
+        li.setIconImage(get_cover_art(artist['id']))
+        li.setThumbnailImage(get_cover_art(artist['id']))
         li.setProperty('fanart_image', get_cover_art(artist['id']))
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
@@ -87,7 +88,9 @@ def album_list():
         url = build_url({'mode': 'track_list',
                          'foldername': album['title'],
                          'album_id': album['id']})
-        li = xbmcgui.ListItem(album['title'], iconImage=get_cover_art(album['id']))
+        li = xbmcgui.ListItem(album['title'])
+        li.setIconImage(get_cover_art(album['id']))
+        li.setThumbnailImage(get_cover_art(album['id']))
         li.setProperty('fanart_image', get_cover_art(album['id']))
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
@@ -106,12 +109,16 @@ def track_list():
             'stream.view',
             parameters={'id': track['id'],
                         'maxBitRate': bitrate,
-                        'format': trans_format,
-                        'estimateContentLength': 'true'})
-        li = xbmcgui.ListItem(track['title'], iconImage=get_cover_art(track['id']))
+                        'format': trans_format})
+        li = xbmcgui.ListItem(track['title'])
+        li.setIconImage(get_cover_art(track['id']))
+        li.setThumbnailImage(get_cover_art(track['id']))
         li.setProperty('fanart_image', get_cover_art(track['id']))
         li.setProperty('IsPlayable', 'true')
-        li.setInfo(type='Music', infoLabels={'Title': track['title']})
+        li.setInfo(
+            type='Music',
+            infoLabels={'Artist': track['artist'],
+                        'Title': track['title']})
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
