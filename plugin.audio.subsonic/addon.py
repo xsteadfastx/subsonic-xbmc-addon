@@ -1,9 +1,6 @@
 import sys
 import urllib
 import urlparse
-import xbmcaddon
-import xbmcgui
-import xbmcplugin
 sys.path.append('./resources/lib')
 import requests
 
@@ -12,42 +9,47 @@ def build_url(query):
     return base_url + '?' + urllib.urlencode(query)
 
 
-def subsonic_api(method, parameters={'none': 'none'}):
-    return subsonic_url + '/rest/' + method + '?u=%s&p=enc:%s&v=1.1.0&c=xbmc-subsonic&f=json&' % (username, password.encode('hex')) + urllib.urlencode(parameters)
+class Subsonic(object):
 
+    def __init__(self, url, username, password):
+        self.url = url
+        self.username = username
+        self.password = password
 
-def get_artist_list():
-    api_url = subsonic_api(
-        'getIndexes.view',
-        parameters={'musicFolderId': '0'})
-    r = requests.get(api_url)
-    artists = []
-    for index in r.json()['subsonic-response']['indexes']['index']:
-        for artist in index['artist']:
+    def api(self, method, parameters={'none': 'none'}):
+        return self.url + '/rest/' + method + '?u=%s&p=enc:%s&v=1.1.0&c=xbmc-subsonic&f=json&' % (
+            self.username, self.password.encode('hex')) + urllib.urlencode(parameters)
+
+    def artist_list(self):
+        api_url = self.api('getIndexes.view',
+                           parameters={'musicFolderId': '0'})
+        r = requests.get(api_url)
+        artists = []
+        for index in r.json()['subsonic-response']['indexes']['index']:
+            for artist in index['artist']:
+                item = {}
+                item['name'] = artist['name'].encode('utf-8')
+                item['id'] = artist['id'].encode('utf-8')
+                artists.append(item)
+
+        return artists
+
+    def music_directory_list(self, id):
+        api_url = self.api('getMusicDirectory.view',
+                           parameters={'id': id})
+        r = requests.get(api_url)
+        albums = []
+        for album in r.json()['subsonic-response']['directory']['child']:
             item = {}
-            item['name'] = artist['name'].encode('utf-8')
-            item['id'] = artist['id'].encode('utf-8')
-            artists.append(item)
+            item['artist'] = album['artist'].encode('utf-8')
+            item['title'] = album['title'].encode('utf-8')
+            item['id'] = album['id'].encode('utf-8')
+            albums.append(item)
 
-    return artists
+        return albums
 
-
-def get_music_directory_list(id):
-    api_url = subsonic_api('getMusicDirectory.view', parameters={'id': id})
-    r = requests.get(api_url)
-    albums = []
-    for album in r.json()['subsonic-response']['directory']['child']:
-        item = {}
-        item['artist'] = album['artist'].encode('utf-8')
-        item['title'] = album['title'].encode('utf-8')
-        item['id'] = album['id'].encode('utf-8')
-        albums.append(item)
-
-    return albums
-
-
-def get_cover_art(id):
-    return subsonic_api('getCoverArt.view', parameters={'id': id})
+    def cover_art(self, id):
+        return self.api('getCoverArt.view', parameters={'id': id})
 
 
 def main_page():
@@ -63,15 +65,16 @@ def main_page():
 
 
 def artist_list():
-    artists = get_artist_list()
+    subsonic = Subsonic(subsonic_url, username, password)
+    artists = subsonic.artist_list()
     for artist in artists:
         url = build_url({'mode': 'album_list',
                          'foldername': artist['name'],
                          'artist_id': artist['id']})
         li = xbmcgui.ListItem(artist['name'])
-        li.setIconImage(get_cover_art(artist['id']))
-        li.setThumbnailImage(get_cover_art(artist['id']))
-        li.setProperty('fanart_image', get_cover_art(artist['id']))
+        li.setIconImage(subsonic.cover_art(artist['id']))
+        li.setThumbnailImage(subsonic.cover_art(artist['id']))
+        li.setProperty('fanart_image', subsonic.cover_art(artist['id']))
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
@@ -83,15 +86,16 @@ def artist_list():
 
 def album_list():
     artist_id = args.get('artist_id', None)
-    albums = get_music_directory_list(artist_id[0])
+    subsonic = Subsonic(subsonic_url, username, password)
+    albums = subsonic.music_directory_list(artist_id[0])
     for album in albums:
         url = build_url({'mode': 'track_list',
                          'foldername': album['title'],
                          'album_id': album['id']})
         li = xbmcgui.ListItem(album['title'])
-        li.setIconImage(get_cover_art(album['id']))
-        li.setThumbnailImage(get_cover_art(album['id']))
-        li.setProperty('fanart_image', get_cover_art(album['id']))
+        li.setIconImage(subsonic.cover_art(album['id']))
+        li.setThumbnailImage(subsonic.cover_art(album['id']))
+        li.setProperty('fanart_image', subsonic.cover_art(album['id']))
         xbmcplugin.addDirectoryItem(
             handle=addon_handle,
             url=url,
@@ -103,17 +107,18 @@ def album_list():
 
 def track_list():
     album_id = args.get('album_id', None)
-    tracks = get_music_directory_list(album_id[0])
+    subsonic = Subsonic(subsonic_url, username, password)
+    tracks = subsonic.music_directory_list(album_id[0])
     for track in tracks:
-        url = subsonic_api(
+        url = subsonic.api(
             'stream.view',
             parameters={'id': track['id'],
                         'maxBitRate': bitrate,
                         'format': trans_format})
         li = xbmcgui.ListItem(track['title'])
-        li.setIconImage(get_cover_art(track['id']))
-        li.setThumbnailImage(get_cover_art(track['id']))
-        li.setProperty('fanart_image', get_cover_art(track['id']))
+        li.setIconImage(subsonic.cover_art(track['id']))
+        li.setThumbnailImage(subsonic.cover_art(track['id']))
+        li.setProperty('fanart_image', subsonic.cover_art(track['id']))
         li.setProperty('IsPlayable', 'true')
         li.setInfo(
             type='Music',
@@ -128,6 +133,10 @@ def track_list():
 
 
 if __name__ == '__main__':
+    import xbmcaddon
+    import xbmcgui
+    import xbmcplugin
+
     my_addon = xbmcaddon.Addon('plugin.audio.subsonic')
     subsonic_url = my_addon.getSetting('subsonic_url')
     username = my_addon.getSetting('username')
@@ -139,7 +148,7 @@ if __name__ == '__main__':
     addon_handle = int(sys.argv[1])
     args = urlparse.parse_qs(sys.argv[2][1:])
 
-    xbmcplugin.setContent(addon_handle, 'movies')
+    xbmcplugin.setContent(addon_handle, 'songs')
 
     mode = args.get('mode', None)
 
