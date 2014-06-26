@@ -48,18 +48,89 @@ class Subsonic(object):
 
         return albums
 
+    def genre_list(self):
+        api_url = self.api('getGenres.view')
+        r = requests.get(api_url)
+        genres = []
+        for genre in r.json()['subsonic-response']['genres']['genre']:
+            item = {}
+            item['songCount'] = genre['songCount']
+            item['albumCount'] = genre['albumCount']
+            item['value'] = genre['value']
+            genres.append(item)
+
+        return genres
+
+    def albums_by_genre_list(self, genre):
+        api_url = self.api('getAlbumList.view',
+                           parameters={'type': 'byGenre',
+                                       'genre': genre,
+                                       'size': '500'})
+        r = requests.get(api_url)
+        albums = []
+        for album in r.json()['subsonic-response']['albumList']['album']:
+            item = {}
+            item['artist'] = album['artist'].encode('utf-8')
+            item['title'] = album['title'].encode('utf-8')
+            item['id'] = album['id'].encode('utf-8')
+            albums.append(item)
+
+        return albums
+
     def cover_art(self, id):
         return self.api('getCoverArt.view', parameters={'id': id})
 
 
 def main_page():
-    url = build_url({'mode': 'artist_list', 'foldername': 'Artists'})
-    li = xbmcgui.ListItem('Artists', iconImage='DefaultFolder.png')
-    xbmcplugin.addDirectoryItem(
-        handle=addon_handle,
-        url=url,
-        listitem=li,
-        isFolder=True)
+    menu = [{'mode': 'artist_list', 'foldername': 'Artists'},
+            {'mode': 'genre_list', 'foldername': 'Genres'}]
+    for entry in menu:
+        url = build_url(entry)
+        li = xbmcgui.ListItem(entry['foldername'],
+                              iconImage='DefaultFolder.png')
+        xbmcplugin.addDirectoryItem(
+            handle=addon_handle,
+            url=url,
+            listitem=li,
+            isFolder=True)
+
+    xbmcplugin.endOfDirectory(addon_handle)
+
+
+def genre_list():
+    subsonic = Subsonic(subsonic_url, username, password)
+    genres = subsonic.genre_list()
+    for genre in genres:
+        url = build_url({'mode': 'albums_by_genre_list',
+                         'foldername': genre['value']})
+        li = xbmcgui.ListItem(genre['value'],
+                              iconImage='DefaultFolder.png')
+        xbmcplugin.addDirectoryItem(
+            handle=addon_handle,
+            url=url,
+            listitem=li,
+            isFolder=True)
+
+    xbmcplugin.endOfDirectory(addon_handle)
+
+
+def albums_by_genre_list():
+    genre = args.get('foldername', None)
+    subsonic = Subsonic(subsonic_url, username, password)
+    albums = subsonic.albums_by_genre_list(genre[0])
+    for album in albums:
+        url = build_url({'mode': 'track_list',
+                         'foldername': album['title'],
+                         'album_id': album['id']})
+        li = xbmcgui.ListItem(album['artist'] + ' - ' + album['title'])
+        li.setIconImage(subsonic.cover_art(album['id']))
+        li.setThumbnailImage(subsonic.cover_art(album['id']))
+        li.setProperty('fanart_image', subsonic.cover_art(album['id']))
+        xbmcplugin.addDirectoryItem(
+            handle=addon_handle,
+            url=url,
+            listitem=li,
+            isFolder=True)
 
     xbmcplugin.endOfDirectory(addon_handle)
 
@@ -160,3 +231,7 @@ if __name__ == '__main__':
         album_list()
     elif mode[0] == 'track_list':
         track_list()
+    elif mode[0] == 'genre_list':
+        genre_list()
+    elif mode[0] == 'albums_by_genre_list':
+        albums_by_genre_list()

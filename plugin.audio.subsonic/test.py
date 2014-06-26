@@ -37,6 +37,26 @@ class TestAPI(unittest.TestCase):
             self.subsonic_url, self.username, self.password.encode('hex'))
         self.assertEqual(response, expected)
 
+    def test_genre_list(self):
+        subsonic = addon.Subsonic(self.subsonic_url,
+                                  self.username,
+                                  self.password)
+        response = subsonic.genre_list()
+        for item in response:
+            self.assertIn('songCount', item.keys())
+            self.assertIn('albumCount', item.keys())
+            self.assertIn('value', item.keys())
+
+    def test_albums_by_genre_list(self):
+        subsonic = addon.Subsonic(self.subsonic_url,
+                                  self.username,
+                                  self.password)
+        response = subsonic.albums_by_genre_list('Rock')
+        for item in response:
+            self.assertIn('artist', item.keys())
+            self.assertIn('title', item.keys())
+            self.assertIn('id', item.keys())
+
 
 if __name__ == '__main__':
     unittest.main()
