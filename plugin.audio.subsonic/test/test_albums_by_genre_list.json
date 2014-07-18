@@ -1,0 +1,78 @@
+{
+   "subsonic-response" : {
+      "status" : "ok",
+      "version" : "1.10.2",
+      "albumList" : {
+         "album" : [ {
+            "id" : "19",
+            "parent" : "2",
+            "isDir" : true,
+            "title" : "Pyromantikk",
+            "album" : "Pyromantikk",
+            "artist" : "Johndoe",
+            "year" : 2004,
+            "genre" : "Rock",
+            "coverArt" : "19",
+            "created" : "2009-10-03T15:28:58.000Z"
+         }, {
+            "id" : "23",
+            "parent" : "3",
+            "isDir" : true,
+            "title" : "Eve",
+            "album" : "Eve",
+            "artist" : "Shearer",
+            "year" : 2008,
+            "genre" : "Rock",
+            "coverArt" : "23",
+            "averageRating" : 4.0,
+            "created" : "2009-10-03T17:11:54.000Z"
+         }, {
+            "id" : "24",
+            "parent" : "3",
+            "isDir" : true,
+            "title" : "Adam",
+            "album" : "Adam",
+            "artist" : "Shearer",
+            "year" : 2008,
+            "genre" : "Rock",
+            "coverArt" : "24",
+            "created" : "2009-10-03T16:57:16.000Z"
+         }, {
+            "id" : "74",
+            "parent" : "6",
+            "isDir" : true,
+            "title" : "This Ain't Hollywood",
+            "album" : "This Ain't Hollywood",
+            "artist" : "Silence is Sexy",
+            "year" : 2008,
+            "genre" : "Rock",
+            "coverArt" : "74",
+            "userRating" : 5,
+            "averageRating" : 3.5,
+            "created" : "2009-10-03T17:34:17.000Z"
+         }, {
+            "id" : "75",
+            "parent" : "6",
+            "isDir" : true,
+            "title" : "Everything You Should Know",
+            "album" : "Everything You Should Know",
+            "artist" : "Silence is Sexy",
+            "year" : 2008,
+            "genre" : "Rock",
+            "coverArt" : "75",
+            "created" : "2009-10-03T17:24:01.000Z"
+         }, {
+            "id" : "142",
+            "parent" : "11",
+            "isDir" : true,
+            "title" : "Blue Spirits - The First Chapter",
+            "album" : "Blue Spirits - The First Chapter",
+            "artist" : "PeerGynt Lobogris",
+            "year" : 2008,
+            "genre" : "Rock",
+            "coverArt" : "142",
+            "created" : "2009-10-03T16:12:18.000Z"
+         } ]
+      }
+   }
+}

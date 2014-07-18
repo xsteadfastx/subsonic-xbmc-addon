@@ -1,0 +1,73 @@
+{
+   "subsonic-response" : {
+      "status" : "ok",
+      "version" : "1.10.2",
+      "genres" : {
+         "genre" : [ {
+            "songCount" : 118,
+            "albumCount" : 14,
+            "value" : "(255)"
+         }, {
+            "songCount" : 54,
+            "albumCount" : 6,
+            "value" : "Rock"
+         }, {
+            "songCount" : 51,
+            "albumCount" : 5,
+            "value" : "Blues"
+         }, {
+            "songCount" : 40,
+            "albumCount" : 4,
+            "value" : "Podcast"
+         }, {
+            "songCount" : 34,
+            "albumCount" : 8,
+            "value" : "Electronic"
+         }, {
+            "songCount" : 27,
+            "albumCount" : 2,
+            "value" : "Hip-Hop"
+         }, {
+            "songCount" : 22,
+            "albumCount" : 4,
+            "value" : "Reggae"
+         }, {
+            "songCount" : 19,
+            "albumCount" : 2,
+            "value" : "Metal"
+         }, {
+            "songCount" : 16,
+            "albumCount" : 1,
+            "value" : "Pop"
+         }, {
+            "songCount" : 14,
+            "albumCount" : 2,
+            "value" : "Easy Listening/New Age"
+         }, {
+            "songCount" : 11,
+            "albumCount" : 1,
+            "value" : "Classical"
+         }, {
+            "songCount" : 11,
+            "albumCount" : 0,
+            "value" : "Folk"
+         }, {
+            "songCount" : 6,
+            "albumCount" : 1,
+            "value" : "AlternRock"
+         }, {
+            "songCount" : 3,
+            "albumCount" : 1,
+            "value" : "Hard Rock"
+         }, {
+            "songCount" : 1,
+            "albumCount" : 0,
+            "value" : "Ska"
+         }, {
+            "songCount" : 1,
+            "albumCount" : 0,
+            "value" : "(255)Unknown"
+         } ]
+      }
+   }
+}
