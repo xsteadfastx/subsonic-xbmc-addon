@@ -1,0 +1,160 @@
+{
+   "subsonic-response" : {
+      "status" : "ok",
+      "version" : "1.10.2",
+      "artists" : {
+         "ignoredArticles" : "The El La Los Las Le Les",
+         "index" : [ {
+            "name" : "A",
+            "artist" : [ {
+               "id" : "12",
+               "name" : "Antígona",
+               "coverArt" : "ar-12",
+               "albumCount" : 1
+            }, {
+               "id" : "14",
+               "name" : "Aygan",
+               "coverArt" : "ar-14",
+               "albumCount" : 1
+            } ]
+         }, {
+            "name" : "B",
+            "artist" : [ {
+               "id" : "18",
+               "name" : "BBC Radio 5 live",
+               "coverArt" : "ar-18",
+               "albumCount" : 1
+            }, {
+               "id" : "17",
+               "name" : "BBC World Service",
+               "coverArt" : "ar-17",
+               "albumCount" : 3
+            }, {
+               "id" : "6",
+               "name" : "bilk",
+               "coverArt" : "ar-6",
+               "albumCount" : 1
+            }, {
+               "id" : "16",
+               "name" : "Binärpilot",
+               "coverArt" : "ar-16",
+               "albumCount" : 3
+            }, {
+               "id" : "3",
+               "name" : "Brad Sucks",
+               "coverArt" : "ar-3",
+               "albumCount" : 2
+            } ]
+         }, {
+            "name" : "C",
+            "artist" : [ {
+               "id" : "19",
+               "name" : "Capashen",
+               "coverArt" : "ar-19",
+               "albumCount" : 6
+            }, {
+               "id" : "13",
+               "name" : "Curb Jaw",
+               "coverArt" : "ar-13",
+               "albumCount" : 1
+            } ]
+         }, {
+            "name" : "D",
+            "artist" : [ {
+               "id" : "23",
+               "name" : "The Dada Weatherman",
+               "coverArt" : "ar-23",
+               "albumCount" : 4
+            }, {
+               "id" : "10",
+               "name" : "Deflone",
+               "coverArt" : "ar-10",
+               "albumCount" : 2
+            }, {
+               "id" : "8",
+               "name" : "Dereleech",
+               "coverArt" : "ar-8",
+               "albumCount" : 2
+            } ]
+         }, {
+            "name" : "F",
+            "artist" : [ {
+               "id" : "2",
+               "name" : "FUll Faya Orchestra",
+               "coverArt" : "ar-2",
+               "albumCount" : 1
+            } ]
+         }, {
+            "name" : "J",
+            "artist" : [ {
+               "id" : "20",
+               "name" : "Joe Farren",
+               "coverArt" : "ar-20",
+               "albumCount" : 2
+            }, {
+               "id" : "0",
+               "name" : "Johndoe",
+               "coverArt" : "ar-0",
+               "albumCount" : 1
+            } ]
+         }, {
+            "name" : "M",
+            "artist" : [ {
+               "id" : "11",
+               "name" : "Maya Filipič",
+               "coverArt" : "ar-11",
+               "albumCount" : 1
+            }, {
+               "id" : "7",
+               "name" : "METISSE",
+               "coverArt" : "ar-7",
+               "albumCount" : 1
+            }, {
+               "id" : "21",
+               "name" : "Michael Ellis",
+               "coverArt" : "ar-21",
+               "albumCount" : 3
+            }, {
+               "id" : "5",
+               "name" : "Microdub",
+               "coverArt" : "ar-5",
+               "albumCount" : 2
+            }, {
+               "id" : "22",
+               "name" : "Misteur Valaire",
+               "coverArt" : "ar-22",
+               "albumCount" : 1
+            } ]
+         }, {
+            "name" : "P",
+            "artist" : [ {
+               "id" : "9",
+               "name" : "PeerGynt Lobogris",
+               "coverArt" : "ar-9",
+               "albumCount" : 4
+            } ]
+         }, {
+            "name" : "S",
+            "artist" : [ {
+               "id" : "1",
+               "name" : "Shearer",
+               "coverArt" : "ar-1",
+               "albumCount" : 2
+            }, {
+               "id" : "4",
+               "name" : "Silence is Sexy",
+               "coverArt" : "ar-4",
+               "albumCount" : 2
+            } ]
+         }, {
+            "name" : "U",
+            "artist" : [ {
+               "id" : "15",
+               "name" : "Ugress",
+               "coverArt" : "ar-15",
+               "albumCount" : 4
+            } ]
+         } ]
+      }
+   }
+}

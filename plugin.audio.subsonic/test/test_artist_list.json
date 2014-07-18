@@ -1,0 +1,111 @@
+{
+   "subsonic-response" : {
+      "status" : "ok",
+      "version" : "1.10.2",
+      "indexes" : {
+         "lastModified" : 1389992636770,
+         "ignoredArticles" : "The El La Los Las Le Les",
+         "shortcut" : [ {
+            "id" : "1",
+            "name" : "Podcast"
+         } ],
+         "index" : [ {
+            "name" : "A",
+            "artist" : [ {
+               "id" : "14",
+               "name" : "Antigona"
+            }, {
+               "id" : "16",
+               "name" : "Aygan"
+            } ]
+         }, {
+            "name" : "B",
+            "artist" : [ {
+               "id" : "8",
+               "name" : "bilk"
+            }, {
+               "id" : "18",
+               "name" : "Binaerpilot"
+            }, {
+               "id" : "5",
+               "name" : "Brad Sucks"
+            } ]
+         }, {
+            "name" : "C",
+            "artist" : [ {
+               "id" : "302",
+               "name" : "Capashen"
+            }, {
+               "id" : "15",
+               "name" : "Curb Jaw"
+            } ]
+         }, {
+            "name" : "D",
+            "artist" : [ {
+               "id" : "306",
+               "name" : "The Dada Weatherman"
+            }, {
+               "id" : "12",
+               "name" : "Deflone"
+            }, {
+               "id" : "10",
+               "name" : "Dereleech"
+            } ]
+         }, {
+            "name" : "F",
+            "artist" : [ {
+               "id" : "4",
+               "name" : "Full Faya Orchestra"
+            } ]
+         }, {
+            "name" : "J",
+            "artist" : [ {
+               "id" : "303",
+               "name" : "Joe Farren"
+            }, {
+               "id" : "2",
+               "name" : "Johndoe"
+            } ]
+         }, {
+            "name" : "M",
+            "artist" : [ {
+               "id" : "13",
+               "name" : "Maya Filipic"
+            }, {
+               "id" : "9",
+               "name" : "Metisse"
+            }, {
+               "id" : "304",
+               "name" : "Michael Ellis"
+            }, {
+               "id" : "7",
+               "name" : "Microdub"
+            }, {
+               "id" : "305",
+               "name" : "Misteur Valaire"
+            } ]
+         }, {
+            "name" : "P",
+            "artist" : [ {
+               "id" : "11",
+               "name" : "PeerGynt Lobogris"
+            } ]
+         }, {
+            "name" : "S",
+            "artist" : [ {
+               "id" : "3",
+               "name" : "Shearer"
+            }, {
+               "id" : "6",
+               "name" : "Silence Is Sexy"
+            } ]
+         }, {
+            "name" : "U",
+            "artist" : [ {
+               "id" : "17",
+               "name" : "Ugress"
+            } ]
+         } ]
+      }
+   }
+}

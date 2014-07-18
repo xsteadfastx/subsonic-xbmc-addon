@@ -1,0 +1,65 @@
+{
+   "subsonic-response" : {
+      "status" : "ok",
+      "version" : "1.10.2",
+      "directory" : {
+         "id" : "1",
+         "name" : "Podcast",
+         "child" : [ {
+            "id" : "294",
+            "parent" : "1",
+            "isDir" : true,
+            "title" : "Dr Karl and the Naked Scientist",
+            "artist" : "Dr Karl and the Naked Scientist",
+            "created" : "2014-01-16T22:32:08.000Z",
+            "starred" : "2014-04-22T10:42:33.955Z"
+         }, {
+            "id" : "549",
+            "parent" : "1",
+            "isDir" : true,
+            "title" : "5 live Science",
+            "album" : "5 live Science",
+            "artist" : "BBC Radio 5 live",
+            "year" : 2014,
+            "genre" : "Podcast",
+            "coverArt" : "549",
+            "created" : "2014-05-03T00:52:17.000Z"
+         }, {
+            "id" : "290",
+            "parent" : "1",
+            "isDir" : true,
+            "title" : "Click",
+            "album" : "Click",
+            "artist" : "BBC World Service",
+            "year" : 2014,
+            "genre" : "Podcast",
+            "coverArt" : "290",
+            "averageRating" : 5.0,
+            "created" : "2014-01-16T22:31:39.000Z"
+         }, {
+            "id" : "296",
+            "parent" : "1",
+            "isDir" : true,
+            "title" : "Discovery",
+            "album" : "Discovery",
+            "artist" : "BBC World Service",
+            "year" : 2014,
+            "genre" : "Podcast",
+            "coverArt" : "296",
+            "created" : "2014-01-16T22:32:21.000Z"
+         }, {
+            "id" : "292",
+            "parent" : "1",
+            "isDir" : true,
+            "title" : "Science in Action",
+            "album" : "Science in Action",
+            "artist" : "BBC World Service",
+            "year" : 2014,
+            "genre" : "Podcast",
+            "coverArt" : "292",
+            "averageRating" : 3.0,
+            "created" : "2014-01-16T22:31:51.000Z"
+         } ]
+      }
+   }
+}
