@@ -7,7 +7,7 @@ import requests
 
 
 def build_url(query):
-    return base_url + '?' + urllib.urlencode(query)
+    return base_url + '?' + urllib.urlencode(dict([k.encode('utf-8'),unicode(v).encode('utf-8')] for k,v in query.items()))
 
 
 class Subsonic(object):
