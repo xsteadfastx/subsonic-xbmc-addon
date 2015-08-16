@@ -9,6 +9,7 @@ subsonic addon for xbmc
 1. `curl -L https://github.com/xsteadfastx/subsonic-xbmc-addon/archive/master.zip -o subsonic.zip`
 2. `cp -Rv subsonic-xbmc-addon/plugin.audio.subsonic ~/.xbmc/addons/`
 3. Configure your url, username and password
+4. Put the contents of the [script.module.requests](https://github.com/beenje/script.module.requests) library in .kodi/addons/script.module.requests
 
 ## Workarounds
 There is a problem that xbmc doesnt play the next song in queue. a workaround is to put the playercorefactory file in the userdata folder. this switches the default player to "dvdplayer" for subsonic. you do that with:
